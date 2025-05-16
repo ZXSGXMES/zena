@@ -1,0 +1,29 @@
+{
+	"name": "zena-vm",
+	"description": "effortlessly create temporary virtual machines with hyperbeam.",
+	"version": "0.1.0",
+	"author": "above <contact@above.gay> (https://above.gay)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Z-Kit-Team/zena..git"
+	},
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"build": "npm i"
+	},
+	"dependencies": {
+		"express": "^4.18.2",
+		"axios": "^1.6.8"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"wrangler": "^4.15.2"
+	},
+	"bugs": {
+		"url": "https://github.com/Z-Kit-Team/zena./issues"
+	},
+	"homepage": "https://github.com/Z-Kit-Team/zena.",
+	"license": "GPL-3.0-only"
+}
