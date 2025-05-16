@@ -31,7 +31,7 @@ const log = {
 };
 
 function requireApiKey(env) {
-	if (!env.HB_API_KEY || env.HB_API_KEY === "CHANGE-ME-TO-YOUR-HYPERBEAM-PRODUCTION-KEY") {
+	if (!env.HB_API_KEY || env.HB_API_KEY === "CHANGE-ME-TO-YOUR-HYPERBEAM-PRODUCTION-KEY") { // DO NOT ACTUALLY SET THIS LINE TO YOUR KEY!!! use enviroment variables please i beg
 		log.error("API Key Checker: HB_API_KEY is not configured.");
 		return new Response(JSON.stringify({
 			error: "ConfigurationError",
