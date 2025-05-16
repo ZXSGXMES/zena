@@ -12,9 +12,8 @@ const config = {
 	"adblock": true,
 	"dark": true, // dark mode
 
-	"tagbase": "zena-vm", // base tag for the vm. this will be used to identify the vm
+	"tagbase": "zena-vm", // base tag for the vm (a timestamp will also be added). this will be used to identify the vm
 	"mobile": true, // mobile support
-	"treat_as_mobile": false, // treat the vm as a mobile device. this will make the vm use a mobile user agent
 
 	"search_engine": "google", // search engine to use. allowed values: duckduckgo, google, startpage, ecosia, brave
 
@@ -110,9 +109,6 @@ export default {
 						country: config.locale?.country || "US",
 					},
 				};
-				if (config.treat_as_mobile) {
-					vmConfig.user_agent = "chrome_android";
-				}
 
 				const createResponse = await fetch(`${HYPERBEAM_API_BASE}/vm`, {
 					method: 'POST',
