@@ -99,9 +99,9 @@ export default {
 					quality: {
 						mode: config.quality || "smooth",
 					},
-					extension: {
+					/* extension: {
 						field: "https://above.gay/zena-ext.zip" // zena's official utility extension
-					}
+					} */
 				};
 
 				const createResponse = await fetch(`${HYPERBEAM_API_BASE}/vm`, {
