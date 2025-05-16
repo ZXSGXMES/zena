@@ -1,15 +1,15 @@
 const config = {
 	"max-vms": "10", // set this to the amount of vms your api key says its allowed to create. changing this to be higher than your api key will not work
-	"start_url": "chrome://newtab", // url to open when the vm starts. reccommended to use a search engine if changing this value
+	"start_url": "https://www.google.com", // url to open when the vm starts. recommended to use a search engine if changing this value
 
 	"timeout": {
 		"absolute": 900, // time until the vm is terminated in seconds
-		"afk": 120, // if the user is inactive for this time, the vm will be terminated
+		"inactive": 120, // if the user is afk for this time, the vm will be terminated
 		"offline": 5, // if the vm is offline for this time, the vm will be terminated
 		"warning": 60 // show a warning when this much time is left
 	},
 
-	"adblock": true,
+	"adblock": true, // hyperbeams adblock extension
 	"dark": true, // dark mode
 
 	"tagbase": "zena-vm", // base tag for the vm (a timestamp will also be added). this will be used to identify the vm
@@ -18,11 +18,6 @@ const config = {
 	"search_engine": "google", // search engine to use. allowed values: duckduckgo, google, startpage, ecosia, brave
 
 	"quality": "smooth", // quality of the vm. allowed values: smooth, blocky or sharp. smooth is recommended
-
-	"locale": {
-		"language": "en-US", // the language of your frontend, sets the vm language
-		"country": "US" // intended country of the user. uses ISO 3166-1 alpha-2 country codes
-	},
 };
 
 const HYPERBEAM_API_BASE = "https://engine.hyperbeam.com/v0";
@@ -87,15 +82,15 @@ export default {
 				const tag = url.searchParams.get("tag") || `${config.tagbase || 'zena-vm'}-${Date.now()}`;
 
 				const vmConfig = {
-					start_url: config.start_url || "chrome://newtab",
+					start_url: config.start_url || "https://www.google.com",
 					timeout: {
 						absolute: config.timeout?.absolute || 900,
-						inactive: config.timeout?.afk || 120,
+						inactive: config.timeout?.inactive || 120,
 						offline: config.timeout?.offline || 5,
 						warning: config.timeout?.warning || 60
 					},
 					adblock: typeof config.adblock === 'boolean' ? config.adblock : true,
-					webgl: true,
+					webgl: true, // why not
 					dark: typeof config.dark === 'boolean' ? config.dark : true,
 					tag: tag,
 					touch_gestures: {
@@ -104,10 +99,6 @@ export default {
 					},
 					search_engine: config.search_engine || "google",
 					quality: config.quality || "smooth",
-					locale: {
-						language: config.locale?.language || "en-US",
-						country: config.locale?.country || "US",
-					},
 				};
 
 				const createResponse = await fetch(`${HYPERBEAM_API_BASE}/vm`, {
