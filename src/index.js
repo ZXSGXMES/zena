@@ -3,8 +3,8 @@ const config = {
 	"start_url": "https://www.google.com", // url to open when the vm starts. recommended to use a search engine if changing this value
 
 	"timeout": {
-		"absolute": 900, // time until the vm is terminated in seconds
-		"inactive": 120, // if the user is afk for this time, the vm will be terminated
+		"main": 900, // time until the vm is terminated in seconds
+		"afk": 120, // if the user is afk for this time, the vm will be terminated
 		"offline": 5, // if the vm is offline for this time, the vm will be terminated
 		"warning": 60 // show a warning when this much time is left
 	},
@@ -17,7 +17,7 @@ const config = {
 
 	"search_engine": "google", // search engine to use. allowed values: duckduckgo, google, startpage, ecosia, brave
 
-	"quality": "smooth", // quality of the vm. allowed values: smooth, blocky or sharp. smooth is recommended
+	"quality": "smooth", // quality of the vm. allowed values: smooth, blocky or sharp. smooth is recommended as sharp uses triple the bandwidth
 };
 
 const HYPERBEAM_API_BASE = "https://engine.hyperbeam.com/v0";
@@ -84,8 +84,8 @@ export default {
 				const vmConfig = {
 					start_url: config.start_url || "https://www.google.com",
 					timeout: {
-						absolute: config.timeout?.absolute || 900,
-						inactive: config.timeout?.inactive || 120,
+						absolute: config.timeout?.main || 900,
+						inactive: config.timeout?.afk || 120,
 						offline: config.timeout?.offline || 5,
 						warning: config.timeout?.warning || 60
 					},
@@ -98,7 +98,9 @@ export default {
 						pinch: typeof config.mobile === 'boolean' ? config.mobile : true,
 					},
 					search_engine: config.search_engine || "google",
-					quality: config.quality || "smooth",
+					quality: {
+						mode: config.quality || "smooth",
+					}
 				};
 
 				const createResponse = await fetch(`${HYPERBEAM_API_BASE}/vm`, {
