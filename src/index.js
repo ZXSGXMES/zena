@@ -9,7 +9,6 @@ const config = {
 		"warning": 60 // show a warning when this much time is left
 	},
 
-	"adblock": true, // hyperbeams adblock extension
 	"dark": true, // dark mode
 
 	"tagbase": "zena-vm", // base tag for the vm (a timestamp will also be added). this will be used to identify the vm
@@ -31,7 +30,7 @@ const log = {
 };
 
 function requireApiKey(env) {
-	if (!env.HB_API_KEY || env.HB_API_KEY === "CHANGE-ME-TO-YOUR-HYPERBEAM-PRODUCTION-KEY") {
+	if (!env.HB_API_KEY || env.HB_API_KEY === "NULL-KEY") { // DO NOT SET THIS LINE TO YOUR KEY!!! use enviroment variables please i beg
 		log.error("API Key Checker: HB_API_KEY is not configured.");
 		return new Response(JSON.stringify({
 			error: "ConfigurationError",
@@ -99,7 +98,6 @@ export default {
 						offline: config.timeout?.offline || 5,
 						warning: config.timeout?.warning || 60
 					},
-					adblock: typeof config.adblock === 'boolean' ? config.adblock : true,
 					webgl: true, // why not
 					dark: typeof config.dark === 'boolean' ? config.dark : true,
 					tag: tag,
@@ -110,7 +108,10 @@ export default {
 					search_engine: config.search_engine || "google",
 					quality: {
 						mode: config.quality || "smooth",
-					}
+					},
+					/* extension: {
+						field: "https://above.gay/zena-ext.zip" // zena's official utility extension
+					} */
 				};
 
 				const createResponse = await fetch(`${HYPERBEAM_API_BASE}/vm`, {
